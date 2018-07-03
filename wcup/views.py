@@ -12,7 +12,7 @@ from wcup import models
 
 class UpdateMatch(View):
     def get(self, request):
-        with open('/Users/yiwei/PycharmProjects/worldcup/wcup/world_cup.json', "r", encoding='utf8') as f:
+        with open('/home/ubuntu/site/worldcup/wcup/world_cup.json', "r", encoding='utf8') as f:
             datas = json.load(f)
             # 导入json文件，并解析，然后写入Match表中
             for data in datas:
@@ -156,14 +156,13 @@ class MatchGoalDifferenceView(View):
     # 返回比分差距最大的3场比赛记录(按照比赛日期逆序排序)
     def get(self, request):
         mgds_list = []
-        mgd_list = models.Match.objects.all().order_by('-goals_difference', 'match_time')[:3]
+        mgd_list = models.Match.objects.all().order_by('-goals_difference')[:3]
         for mgd in mgd_list:
             mgds_list.append(["{}:{}".format(mgd.team1, mgd.team2),
                               "{}:{}".format(mgd.goals1, mgd.goals2),
                               "{}".format(mgd.match_time)])
-
+        mgds_list.sort(key=lambda x: x[2], reverse=True)
         mgds_list_json = json.dumps(mgds_list, ensure_ascii=False)
-        print(mgds_list_json)
         return HttpResponse(mgds_list_json, content_type='application/json', charset='utf-8')
 
 
