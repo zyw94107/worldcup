@@ -32,3 +32,23 @@
 ## 项目部署
 
 参考[部署文档](https://github.com/zyw94107/worldcup/blob/master/deploy.md)
+
+## 测试
+可直接获取Json数据
+
+1、返回所有32强所有球队，要求使用分页(参数page和per_page分别代表第几页和每页多少条记录)
+http://123.207.60.129/wcup/team_list
+http://123.207.60.129/wcup/team_list?page=3&per_page=8
+
+2.返回每个小组净胜球最多的球队
+
+http://123.207.60.129/wcup/goal_dif
+
+3.返回比分差距最大的3场比赛记录(按照比赛日期逆序排序)
+
+http://123.207.60.129/wcup/match_goal_dif
+
+
+4、返回每个小组晋级的两只球队(排名优先级：积分、净胜球、球队名)
+
+http://123.207.60.129/wcup/group_adv
