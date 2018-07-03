@@ -31,7 +31,7 @@ class UpdateMatch(View):
         for obj in objs:
             name = obj.get('team1')
             city_pinyin = p.get_pinyin(name, '')
-            info = models.Team.objects.get_or_create(name=name, name_pinyi=city_pinyin, group=obj.get('group'))
+            info = models.Team.objects.get_or_create(name=name, name_pinyin=city_pinyin, group=obj.get('group'))
         return HttpResponse("suc")
 
 
@@ -146,7 +146,7 @@ class GoalDifferenceView(View):
         group_list = [chr(i) for i in range(65, 73)]
         for group in group_list:
             gd = models.Team.objects.filter(group=group).order_by('-score', 'name_pinyin')[:1]
-            gd_list.append({group: [gd.get().name, gd.get().score]})
+            gd_list.append({group: [gd.get().name, gd.get().goal_difference]})
         print(gd_list)
         gd_list_json = json.dumps(gd_list,  ensure_ascii=False)
         return HttpResponse(gd_list_json, 'application/json', charset='utf-8')
