@@ -38,6 +38,7 @@
 
 1、返回所有32强所有球队，要求使用分页(参数page和per_page分别代表第几页和每页多少条记录)
 http://123.207.60.129/wcup/team_list
+
 http://123.207.60.129/wcup/team_list?page=3&per_page=8
 
 2.返回每个小组净胜球最多的球队
